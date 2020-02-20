@@ -5,7 +5,7 @@ window.addEventListener("DOMContentLoaded", init);
 //initiate codes
 function init() {
   const colorPicker = document.querySelector("#colorpicker");
-  const harmonyForm = document.querySelector("#radiocontainer");
+  const harmonyForm = document.querySelector("#color_harmony");
   colorPicker.addEventListener("input", function() {
     changeColors(this.value);
   });

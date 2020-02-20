@@ -13,18 +13,18 @@
   padding: 1rem;
 }
 
-#radiocontainer {
+#color_harmony {
   display: flex;
   justify-content: center;
 }
 
-#colorcontainers {
+#color_container {
   display: flex;
   justify-content: center;
   margin-top: 2vw;
 }
 
-#colorcontainers > div {
+#color_container > div {
   width: 15%;
   font-size: 125x;
 }
@@ -36,7 +36,7 @@
   background-color: var(--color);
 }
 
-.colorcodecontainer {
+.color_code_container {
   display: grid;
   grid-template-columns: 1fr 2fr;
 }
