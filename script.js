@@ -182,6 +182,55 @@ function getNewMonochromaticValues(hslValue, increment) {
   return newValue;
 }
 
+//triad clac
+
+function getTriadValues(h, s, l) {
+  const hsl = getTriadHSLValues(h, s, l);
+  const rgb = calcRGBfromHSL(hsl);
+  const hex = calcHexfromRGB(rgb);
+  const colorNumber = [2, 3, 4, 5];
+  const triadValues = { hsl, rgb, hex, colorNumber };
+  return triadValues;
+}
+
+function getTriadHSLValues(h, s, l) {
+  const newValues = {
+    h1: getNewTriadValues(h, -120),
+    l1: getNewTriadValues(l, -120, 10),
+    h2: getNewTriadValues(h, 120)
+  };
+  const hsl1 = { h: newValues.h1, s, l },
+    hsl2 = { h: newValues.h1, s, l: newValues.l1 },
+    hsl4 = { h: newValues.h2, s, l: newValues.l1 },
+    hsl5 = { h: newValues.h2, s, l };
+  const hslValues = [hsl1, hsl2, hsl4, hsl5];
+  return hslValues;
+}
+
+function getNewTriadValues(hslValue, hIncrement, lIncrement) {
+  let newValue;
+  if (lIncrement) {
+    console.log("l please");
+    newValue = hslValue + lIncrement;
+    if (newValue > 100) {
+      newValue = 100;
+    }
+    if (newValue < 0) {
+      newValue = 0;
+    }
+  } else {
+    console.log("h please");
+    newValue = hslValue + hIncrement;
+    if (newValue < 0) {
+      newValue += 360;
+    }
+    if (newValue > 360) {
+      newValue -= 360;
+    }
+  }
+  return newValue;
+}
+
 //complementary calc
 
 function getComplementaryValues(h, s, l) {
@@ -221,6 +270,85 @@ function getNewComplementaryValues(hslValue, increment, isL) {
       console.log(newValue);
       newValue -= 360;
     }
+  }
+  return newValue;
+}
+
+//compound calc
+
+function getCompoundValues(h, s, l) {
+  const hsl = getCompoundHSLValues(h, s, l);
+  const rgb = calcRGBfromHSL(hsl);
+  const hex = calcHexfromRGB(rgb);
+  const colorNumber = [2, 3, 4, 5];
+  const compoundValues = { hsl, rgb, hex, colorNumber };
+  return compoundValues;
+}
+
+function getCompoundHSLValues(h, s, l) {
+  const newValues = {
+    h1: getNewCompoundValues(h, 20),
+    h2: getNewCompoundValues(h, 120),
+    l1: getNewCompoundValues(l, -15, true)
+  };
+  const hsl1 = { h: newValues.h1, s, l },
+    hsl2 = { h: newValues.h1, s, l: newValues.l1 },
+    hsl4 = { h: newValues.h2, s, l },
+    hsl5 = { h: newValues.h2, s, l: newValues.l1 };
+  const hslValues = [hsl1, hsl2, hsl4, hsl5];
+  return hslValues;
+}
+
+function getNewCompoundValues(hslValue, increment, isL) {
+  let newValue = hslValue + increment;
+  if (isL) {
+    if (newValue > 100) {
+      newValue = 100;
+    }
+    if (newValue < 0) {
+      newValue = 0;
+    }
+  } else {
+    if (newValue > 360) {
+      console.log(newValue);
+      newValue -= 360;
+    }
+  }
+  return newValue;
+}
+
+//shades calc
+function getShadesValues(h, s, l) {
+  const hsl = getShadesHSLValues(h, s, l);
+  const rgb = calcRGBfromHSL(hsl);
+  const hex = calcHexfromRGB(rgb);
+  const colorNumber = [2, 3, 4, 5];
+  const shadesValues = { hsl, rgb, hex, colorNumber };
+  return shadesValues;
+}
+
+function getShadesHSLValues(h, s) {
+  const newValues = {
+    l1: 25,
+    l2: 50,
+    l3: 75,
+    l4: 10
+  };
+  const hsl1 = { h, s, l: newValues.l1 },
+    hsl2 = { h, s, l: newValues.l2 },
+    hsl4 = { h, s, l: newValues.l3 },
+    hsl5 = { h, s, l: newValues.l4 };
+  const hslValues = [hsl1, hsl2, hsl4, hsl5];
+  return hslValues;
+}
+
+function getNewShadesValues(hslValue, increment) {
+  let newValue = hslValue + increment;
+  if (newValue > 100) {
+    newValue = 100;
+  }
+  if (newValue < 0) {
+    newValue = 0;
   }
   return newValue;
 }
